@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
 	public float speed;
+	public Weapon weapon;
 
 	// Use this for initialization
 	void Start () {
@@ -26,5 +27,14 @@ public class PlayerMovement : MonoBehaviour {
 			gameObject.GetComponent<CharacterController> ().SimpleMove (transform.right * speed);
 		}
 
+		if(Input.GetMouseButtonDown(0) ||
+			(weapon.automatic && Input.GetMouseButton(0)))
+			{
+				Fire();}
+
+	}
+
+	private void Fire(){
+		weapon.GetComponent<Weapon>().Fire ();
 	}
 }

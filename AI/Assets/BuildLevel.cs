@@ -10,10 +10,11 @@ public class BuildLevel : MonoBehaviour {
 
 	public int numberOfRooms;
 	public static float GRID_SIZE = 45;
-	static System.Random random = new System.Random ();
-		private Dictionary<Vector3,Room> rooms;
 
-	// Use this for initialization
+	private static System.Random random = new System.Random ();
+	private Dictionary<Vector3,Room> rooms;
+
+
 	void Start () {
 			rooms = new Dictionary<Vector3,Room> ();
 		makeRoom (Vector3.zero);
@@ -63,7 +64,7 @@ public class BuildLevel : MonoBehaviour {
 		}
 
 		GameObject room = GameObject.Instantiate (Resources.Load ("Room")) as GameObject;
-		room.gameObject.transform.position = new Vector3 (c.x*45, 0, c.z*45);
+		room.gameObject.transform.position = new Vector3 (c.x*GRID_SIZE, 0, c.z*GRID_SIZE);
 
 
 
