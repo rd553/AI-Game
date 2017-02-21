@@ -27,6 +27,11 @@ public class PlayerMovement : MonoBehaviour {
 			gameObject.GetComponent<CharacterController> ().SimpleMove (transform.right * speed);
 		}
 
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			//JUMP
+			//and some isGrounded stuff too probably who knows
+		}
+
 		if(Input.GetMouseButtonDown(0) ||
 			(weapon.automatic && Input.GetMouseButton(0)))
 			{
