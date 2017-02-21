@@ -21,5 +21,6 @@ public class Bullet : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 		Destroy (gameObject);
+
 	}
 }
