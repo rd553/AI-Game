@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1752696344}
-  numberOfRooms: 12
+  numberOfRooms: 1
 --- !u!4 &118004165
 Transform:
   m_ObjectHideFlags: 0
@@ -895,8 +895,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   weapon: {fileID: 1579637570}
-  jumpSpeed: 0.5
-  fallSpeed: 0.05
+  jumpSpeed: 0.4
+  fallSpeed: 0.04
   maxFallSpeed: 0.16
 --- !u!143 &1752696346
 CharacterController:
