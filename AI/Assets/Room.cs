@@ -49,4 +49,20 @@ public class Room : MonoBehaviour {
 		return r;
 
 	}
+
+	public List<MakeWall> GetClosed(){
+		List<MakeWall> r = new List<MakeWall> ();
+
+		if (!north.Open ())
+			r.Add (north);
+		if (!south.Open ())
+			r.Add (south);
+		if (!east.Open ())
+			r.Add (east);
+		if (!west.Open ())
+			r.Add (west);
+
+		return r;
+
+	}
 }

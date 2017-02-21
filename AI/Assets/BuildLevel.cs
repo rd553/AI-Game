@@ -7,7 +7,7 @@ public class BuildLevel : MonoBehaviour {
 
 
 
-
+	public GameObject player;
 	public int numberOfRooms;
 	public static float GRID_SIZE = 45;
 
@@ -21,43 +21,82 @@ public class BuildLevel : MonoBehaviour {
 		//make the first room at 0,0
 		makeRoom (Vector3.zero);
 
+
 		while (numberOfRooms > 0) {
-			//pick a random room
-			List<Vector3> keys = rooms.Keys.ToList ();
-			Vector3 coords = keys [random.Next (keys.Count)];
-			    
-			Room selected;
-			rooms.TryGetValue (coords, out selected);
+			
 
-			//make sure it has a space
-			List<MakeWall> dirs = selected.GetComponent<Room> ().GetOpen ();
-			if (dirs.Count < 1) {
-				continue;
-			}
-			MakeWall dir = dirs [random.Next (dirs.Count)];
-			Room newRoom = makeRoom (dir.OppositeVector () + coords);
-			//and make sure that space doesn't lead to a pre-existing room
-			if (newRoom == null) {
-				continue;
-			}
-			//turn that direction into a doorway
-			newRoom.GetWall (dir.Opposite ()).Become(MakeWall.Types.Door);
-			dir.Become (MakeWall.Types.Door);
-
-			//and put a corridor in between
-			GameObject corridor = GameObject.Instantiate (Resources.Load ("Corridor"),dir.gameObject.transform) as GameObject;
-			corridor.transform.parent = dir.transform;
+			connectNewRoom ();
 
 
 		}
 
+		//create a starting room with only one exit, and move the player to it
+		Vector3? startcoords = null;
+		while (startcoords == null) {
+			startcoords = connectNewRoom ();
+		}
+		Room startroom;
+		rooms.TryGetValue ((Vector3)startcoords, out startroom);
+		Vector3 p = startroom.gameObject.transform.position;
+		player.transform.position = new Vector3 (p.x, 1.5f, p.z);
+
+		Wallify (startroom);
+		rooms.Remove ((Vector3)startcoords);
+
+
+		Vector3? endcoords = null;
+		while (endcoords == null) {
+			endcoords = connectNewRoom ();
+		}
+		Room endroom;
+		rooms.TryGetValue ((Vector3)endcoords, out endroom);
+		endroom.GetWall (endroom.GetClosed () [0].Opposite ()).Become (MakeWall.Types.EndDoor);
 
 		//We're done, so all remaining open directions become walls
 		foreach (KeyValuePair<Vector3, Room> kvp in rooms) {
-			foreach (MakeWall mw in kvp.Value.GetOpen()) {
-				mw.Become (MakeWall.Types.Wall);
-			}
+			Wallify (kvp.Value);
 		}
+	}
+
+	private Vector3 RandomRoom(){
+		List<Vector3> keys = rooms.Keys.ToList ();
+		Vector3 coords = keys [random.Next (keys.Count)];
+		return coords;
+	}
+
+
+	private void Wallify(Room room){
+		foreach (MakeWall mw in room.GetOpen()) {
+			mw.Become (MakeWall.Types.Wall);
+		}
+	}
+	private Vector3? connectNewRoom(){
+		
+		Vector3 coords = RandomRoom ();
+		Room selected;
+		//pick a random room
+		rooms.TryGetValue (coords, out selected);
+
+		//make sure it has a space
+		List<MakeWall> dirs = selected.GetComponent<Room> ().GetOpen ();
+		if (dirs.Count < 1) {
+			return null;
+		}
+		MakeWall dir = dirs [random.Next (dirs.Count)];
+		Vector3 newcoords = dir.OppositeVector () + coords;
+		Room newRoom = makeRoom (newcoords);
+		//and make sure that space doesn't lead to a pre-existing room
+		if (newRoom == null) {
+			return null;
+		}
+		//turn that direction into a doorway
+		newRoom.GetWall (dir.Opposite ()).Become(MakeWall.Types.Door);
+		dir.Become (MakeWall.Types.Door);
+
+		//and put a corridor in between
+		GameObject corridor = GameObject.Instantiate (Resources.Load ("Corridor"),dir.gameObject.transform) as GameObject;
+		corridor.transform.parent = dir.transform;
+		return newcoords;
 	}
 
 

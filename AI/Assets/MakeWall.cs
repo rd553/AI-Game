@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MakeWall : MonoBehaviour {
 
-	public enum Types {None, Wall, Door};
+	public enum Types {None, Wall, Door, EndDoor};
 	public enum Direction{North, South, East, West};
 	public Direction dir;
 	public Types type { get; private set; }
@@ -29,6 +29,10 @@ public class MakeWall : MonoBehaviour {
 			break;
 		case Types.Door:
 			prefabName = "Doorway";
+
+			break;
+		case Types.EndDoor:
+			prefabName = "EndDoorway";
 
 			break;
 		default:
