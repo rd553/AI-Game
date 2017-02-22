@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 23157848383362722}
   - component: {fileID: 143240520758740450}
   - component: {fileID: 114397205434428978}
+  - component: {fileID: 114791844983375036}
+  - component: {fileID: 114126910690178648}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -111,6 +113,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1854753146731576}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114126910690178648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854753146731576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e0aef61a8bca045a340795444b0918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weight: 1
+  _maximumDistance: 5
+  _tetherPosition: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
 --- !u!114 &114397205434428978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,6 +142,33 @@ MonoBehaviour:
   maxHealth: 40
   aperture: {fileID: 1693203635830340}
   flashTime: 0.1
+--- !u!114 &114791844983375036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854753146731576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa5ed335f15c43169a7097f25d7aecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _drawGizmos: 0
+  _center: {x: 0, y: 0, z: 0}
+  _radius: 1
+  _minSpeedForTurning: 0.1
+  _movementPriority: 0
+  _turnTime: 0.25
+  _mass: 1
+  _allowedMovementAxes: {x: 1, y: 0, z: 1}
+  _arrivalRadius: 0.25
+  _maxSpeed: 5
+  _maxForce: 10
+  _canMove: 1
+  _queueName: Steering
+  _tickLength: 0.1
+  _maxQueueProcessedPerUpdate: 20
+  _traceAdjustments: 0
 --- !u!136 &136021244585361858
 CapsuleCollider:
   m_ObjectHideFlags: 1

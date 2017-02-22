@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnitySteer.Behaviors;
 using UnityEngine;
 
 public class Enemy : Character {
@@ -45,16 +46,25 @@ public class Enemy : Character {
 			Ray ray = new Ray (gameObject.transform.position, player.transform.position - gameObject.transform.position);
 			RaycastHit hit;
 			if (Physics.Raycast (ray, out hit) &&
-			   hit.transform.gameObject.layer == 8) {
+			    hit.transform.gameObject.layer == 8) {
+				Active (true);
 				GameObject shot = GameObject.Instantiate (Resources.Load ("EnemyShot")) as GameObject;
 				shot.transform.position = aperture.transform.position;
 				shot.transform.LookAt (player.transform);
 
 				shot.GetComponent<Rigidbody> ().AddForce (shot.transform.forward * 15f, ForceMode.Impulse);
 				yield return new WaitForSeconds (1.0f);
-			}
+			} else
+				Active (false);
 			yield return null;
 
+		}
+	}
+
+	void Active(bool active){
+		Steering[] steerings = gameObject.GetComponents<Steering> ();
+		foreach (Steering steering in steerings) {
+			steering.enabled = active;
 		}
 	}
 
