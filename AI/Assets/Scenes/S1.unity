@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1752696344}
-  numberOfRooms: 1
+  numberOfRooms: 10
 --- !u!4 &118004165
 Transform:
   m_ObjectHideFlags: 0

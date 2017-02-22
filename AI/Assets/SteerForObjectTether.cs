@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class SteerForObjectTether : SteerForTether {
 
-	public GameObject target;
+	public string targetName;
+	private GameObject target;
 
 	void Start(){
-		target = GameObject.Find("Capsule");
+		target = GameObject.Find(targetName);
 	}
 	// Update is called once per frame
 	void Update () {

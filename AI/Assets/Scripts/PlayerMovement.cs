@@ -41,7 +41,9 @@ public class PlayerMovement : MonoBehaviour {
 
 
 		if (Input.GetKeyDown (KeyCode.Space) && controller.isGrounded) {
-			StartCoroutine (Jump ());
+			StartCoroutine (Jump (true));
+		} else if (!controller.isGrounded && !jumping) {
+			StartCoroutine (Jump (false));
 		}
 
 		if (!controller.isGrounded) {
@@ -78,10 +80,15 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
-	IEnumerator Jump(){
+	IEnumerator Jump(bool jumped){
+		jumping = true;
 
-		Vector3 jumpForce = transform.up * jumpSpeed;
-		controller.Move (jumpForce);
+		Vector3 jumpForce;
+		if (jumped) {
+			jumpForce = transform.up * jumpSpeed;
+			controller.Move (jumpForce);
+		}
+		else{jumpForce = Vector3.zero;}
 
 		while (!controller.isGrounded) {
 			jumpForce -= new Vector3(0,fallSpeed,0);
@@ -90,9 +97,10 @@ public class PlayerMovement : MonoBehaviour {
 			yield return null;
 		}
 
+		jumping = false;
 
 
-
+		 
 
 
 	}

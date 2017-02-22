@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114397205434428978}
   - component: {fileID: 114791844983375036}
   - component: {fileID: 114126910690178648}
+  - component: {fileID: 114536134713621118}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -125,9 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 1
-  _maximumDistance: 5
+  _maximumDistance: 8.5
   _tetherPosition: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  targetName: Capsule
 --- !u!114 &114397205434428978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +143,18 @@ MonoBehaviour:
   maxHealth: 40
   aperture: {fileID: 1693203635830340}
   flashTime: 0.1
+--- !u!114 &114536134713621118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854753146731576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355ec2bce8146aa408c782fa9866d8ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weight: 5
 --- !u!114 &114791844983375036
 MonoBehaviour:
   m_ObjectHideFlags: 1
