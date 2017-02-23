@@ -22,7 +22,7 @@ namespace UnitySteer.Behaviors
         /// <summary>
         /// Cached vehicle
         /// </summary>
-        private Vehicle _vehicle;
+        public Vehicle _vehicle;
 
         [SerializeField] private float _weight = 1;
 
@@ -43,8 +43,10 @@ namespace UnitySteer.Behaviors
         /// </remarks>
         public Vector3 Force
         {
+			
             get
             {
+				
                 _force = CalculateForce();
                 if (_force != Vector3.zero)
                 {
@@ -126,7 +128,7 @@ namespace UnitySteer.Behaviors
         /// </summary>
         public Vector3 WeighedForce
         {
-            get { return Force * _weight; }
+			get {  return Force * _weight; }
         }
 
         /// <summary>

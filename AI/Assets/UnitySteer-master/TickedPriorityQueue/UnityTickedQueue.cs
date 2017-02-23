@@ -105,6 +105,7 @@ public class UnityTickedQueue : MonoBehaviour
 	/// </param>
 	public void Add(ITicked ticked)
 	{
+//		Debug.Log (ticked.ToString());
 		_queue.Add(ticked);
 	}
 	

@@ -120,6 +120,8 @@ namespace UnitySteer.Behaviors
             base.OnDisable();
         }
 
+
+
         #endregion
 
         #region Velocity / Speed methods
@@ -134,8 +136,10 @@ namespace UnitySteer.Behaviors
 
         protected void OnUpdateSteering(object obj)
         {
+			
             if (enabled)
             {
+				
                 // We just calculate the forces, and expect the radar updates itself.
                 CalculateForces();
             }
@@ -162,11 +166,12 @@ namespace UnitySteer.Behaviors
 
         protected void CalculateForces()
         {
+			
             PreviousTickTime = CurrentTickTime;
             CurrentTickTime = Time.time;
 
             if (!CanMove || Mathf.Approximately(MaxForce, 0) || Mathf.Approximately(MaxSpeed, 0))
-            {
+			{
                 return;
             }
             UnityEngine.Profiling.Profiler.BeginSample("Calculating vehicle forces");
@@ -175,10 +180,10 @@ namespace UnitySteer.Behaviors
 
             UnityEngine.Profiling.Profiler.BeginSample("Adding up basic steerings");
             for (var i = 0; i < Steerings.Length; i++)
-            {
+			{
                 var s = Steerings[i];
                 if (s.enabled)
-                {
+				{
                     force += s.WeighedForce;
                 }
             }
@@ -207,12 +212,24 @@ namespace UnitySteer.Behaviors
             // overkill. 
             var adjustedVelocity = Vector3.zero;
             UnityEngine.Profiling.Profiler.BeginSample("Adding up post-processing steerings");
+
+			//Debug.Log (SteeringPostprocessors.Length);
+
             for (var i = 0; i < SteeringPostprocessors.Length; i++)
-            {
+			{
                 var s = SteeringPostprocessors[i];
+
+				if (s == null) {
+					continue;
+				}
+
                 if (s.enabled)
                 {
-                    adjustedVelocity += s.WeighedForce;
+
+
+						adjustedVelocity += s.WeighedForce;
+
+
                 }
             }
             UnityEngine.Profiling.Profiler.EndSample();
@@ -309,8 +326,11 @@ namespace UnitySteer.Behaviors
 
         private void Update()
         {
+
+
             if (CanMove)
             {
+				
                 ApplySteeringForce(Time.deltaTime);
                 AdjustOrientation(Time.deltaTime);
             }

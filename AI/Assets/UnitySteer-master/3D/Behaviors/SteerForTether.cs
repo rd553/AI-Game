@@ -46,6 +46,8 @@ namespace UnitySteer.Behaviors
             {
                 steering = (difference + Vehicle.DesiredVelocity) / 2;
             }
+
+//			Debug.Log (UnityEngine.StackTraceUtility.ExtractStackTrace ());
             return steering;
         }
     }

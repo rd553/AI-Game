@@ -215,7 +215,7 @@ namespace UnitySteer.Behaviors
         /// <summary>
         /// Array of steering post-processor behaviors
         /// </summary>
-        public Steering[] SteeringPostprocessors { get; private set; }
+        public Steering[] SteeringPostprocessors { get;  private set; }
 
         /// <summary>
         /// Current vehicle velocity. Subclasses are likely to only actually
@@ -271,6 +271,12 @@ namespace UnitySteer.Behaviors
             Speedometer = GetComponent<Speedometer>();
             SquaredArrivalRadius = ArrivalRadius * ArrivalRadius;
         }
+
+		public void RecheckPostprocessors(){
+			var allSteerings = GetComponents<Steering>();
+			Steerings = allSteerings.Where(x => !x.IsPostProcess).ToArray();
+			SteeringPostprocessors = allSteerings.Where(x => x.IsPostProcess).ToArray();
+		}
 
         #endregion
 
