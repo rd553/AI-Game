@@ -23,10 +23,12 @@ public class SequenceNode : BTNode {
 			if (child.GetSuccess () == null) {
 				return null;
 			} else if (child.GetSuccess() == false) {
+				succeeded = false;
 				return false;
 			}
 
 		}
+		succeeded = true;
 		return true;
 	}
 }

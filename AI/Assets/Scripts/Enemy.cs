@@ -24,7 +24,7 @@ public class Enemy : Character {
 		flashTimeLeft = 0;
 		normalColor = gameObject.GetComponent<Renderer> ().material.color;
 
-		StartCoroutine (Behave ());
+		//StartCoroutine (Behave ());
 	}
 	
 	// Update is called once per frame
@@ -41,13 +41,19 @@ public class Enemy : Character {
 		
 	}
 
+
+
+	/**
+	 * Defunct: migrated to BehaviorTree implementation
+	 * /*
+	/**
 	IEnumerator Behave(){
 		while (true) {
 			Ray ray = new Ray (gameObject.transform.position, player.transform.position - gameObject.transform.position);
 			RaycastHit hit;
 			if (Physics.Raycast (ray, out hit) &&
 			    hit.transform.gameObject.layer == 8) {
-				Active (true);
+				//Active (true);
 				GameObject shot = GameObject.Instantiate (Resources.Load ("EnemyShot")) as GameObject;
 				shot.transform.position = aperture.transform.position;
 				shot.transform.LookAt (player.transform);
@@ -55,7 +61,7 @@ public class Enemy : Character {
 				shot.GetComponent<Rigidbody> ().AddForce (shot.transform.forward * 15f, ForceMode.Impulse);
 				yield return new WaitForSeconds (1.0f);
 			} else
-				Active (false);
+				//Active (false);
 			yield return null;
 
 		}
@@ -66,11 +72,9 @@ public class Enemy : Character {
 		foreach (Steering steering in steerings) {
 			steering.enabled = active;
 		}
-	}
+	}*/
 
-	void FireAtPlayer(){
 
-	}
 		
 
 	void OnCollisionEnter(Collision c){

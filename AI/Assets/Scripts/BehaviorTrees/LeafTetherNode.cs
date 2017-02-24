@@ -62,4 +62,12 @@ public class LeafTetherNode : LeafNode {
 		}
 		return success;
 	}
+
+	public override void OnReturn(bool? b){
+		base.OnReturn (b);
+		if (b != null && steer != null) {
+			GameObject.Destroy (steer);
+		}
+	}
+
 }

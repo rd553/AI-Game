@@ -48,7 +48,14 @@ public class SteerForFlank : SteerForObjectTether {
 		}
 	}
 
-
+	public override bool? GetSuccess ()
+	{
+		bool? b =  base.GetSuccess ();
+		if (b == true) {
+			Destroy (flanktarget);
+		}
+		return b;
+	}
 
 
 }

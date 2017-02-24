@@ -29,4 +29,8 @@ public abstract class BTNode  {
 
 }
 
+	public virtual void OnReturn(bool? r){
+		succeeded = r;
+	}
+
 }

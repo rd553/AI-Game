@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class InvertDecorator : Decorator {
 
+	public InvertDecorator(BTNode child) : base(child){
+
+	}
+
 	public override bool? GetSuccess(){
 		
 

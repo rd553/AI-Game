@@ -23,7 +23,7 @@ public class SteerForObjectTether : SteerForTether, BTSteering {
 		}
 	}
 
-	public bool? GetSuccess(){
+	public virtual bool? GetSuccess(){
 		bool? r;
 
 		if (timeout && timeouttime <= 0) {
