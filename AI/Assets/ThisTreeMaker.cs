@@ -9,7 +9,8 @@ public class ThisTreeMaker : MonoBehaviour {
 		BehaviourTree bt = gameObject.AddComponent<BehaviourTree> ();
 
 		LeafTetherNode ltn = new LeafTetherNode ("Capsule", 8.5f, 1f);
-		SequenceNode sn = new SequenceNode (ltn);
+		LeafStrafeNode lsn = new LeafStrafeNode ("Capsule", 1.0f, 1f);
+		SequenceNode sn = new SequenceNode (ltn,lsn);
 		RootNode r = new RootNode (sn);
 		r.tree = bt;
 		bt.setRoot (r);

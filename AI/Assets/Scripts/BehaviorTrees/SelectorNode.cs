@@ -5,7 +5,12 @@ using UnityEngine;
 public class SelectorNode : BTNode {
 
 
-
+	public SelectorNode(params BTNode[] btns) : base(){
+		foreach (BTNode btn in btns) {
+			children.Add (btn);
+			btn.parent = this;
+		}
+	}
 
 
 	public override bool? GetSuccess(){

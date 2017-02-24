@@ -1,18 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnitySteer.Behaviors;
-using System.Linq;
+using UnityEngine;
 
-public class LeafTetherNode : LeafNode {
+public class LeafStrafeNode : LeafNode {
 
 	string targetname;
 	float maxdistance;
 	float weight;
 
-	SteerForObjectTether steer;
+	SteerForFlank steer;
 
-	public LeafTetherNode(string targetname, float maxdistance, float weight) : base(){
+	public LeafStrafeNode(string targetname, float maxdistance, float weight) : base(){
 		this.targetname = targetname;
 		this.maxdistance = maxdistance;
 		this.weight = weight;
@@ -31,7 +30,7 @@ public class LeafTetherNode : LeafNode {
 			RootNode root = (RootNode)GetRoot ();
 			GameObject go = root.tree.gameObject;
 
-			steer = go.AddComponent<SteerForObjectTether>();
+			steer = go.AddComponent<SteerForFlank>();
 			steer.targetName = targetname;
 			steer.MaximumDistance = maxdistance;
 			steer.Weight = weight;
@@ -46,7 +45,7 @@ public class LeafTetherNode : LeafNode {
 
 
 
-		
+
 		}
 
 		bool? success = steer.GetSuccess ();
